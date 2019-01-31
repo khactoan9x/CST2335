@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Lab1</string>
+    <string name="app_name">Lab1ToanDinh</string>
     <string name="hello_message">Xin Chao!</string>
-    <string name="ButtonText">Toi la 1 cai nut </string>
+    <string name="ButtonText">Toi la 1 cai nut</string>
+    <string name="TextView">Day la vat dung cua toi</string>
+    <string name="Botton">Nut bam</string>
+    <string name="Switch">Cong tac bat tat</string>
+    <string name="HintText">Dien ten ban o day</string>
+    <string name="checkBoxText">Kiem tra</string>
+    <string name="emailAddress">Nhap dia chi email tai day:</string>
+    <string name="enterEmailAddress">Nhap email</string>
+    <string name="password">Nhap mat khau:</string>
+    <string name="bottonlab3">Dang Nhap</string>
+    <string name="profile">Thong tin cua ban</string>
+    <string name="profileName">Ten cua ban:</string>
+    <string name="enterName">Nhap ten</string>
+    <string name="yourEmail">Dia chi e mail:</string>
+    <string name="enterEmail">Nhap email</string>
+    <string name="picture">Anh:</string>
+    <string name="textBotton">Nhap nut phia duoi de chup anh</string>
+    <string name="sharedEmail"></string>
+
+
 </resources>
