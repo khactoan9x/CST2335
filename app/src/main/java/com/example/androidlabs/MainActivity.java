@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         emailField = (EditText)findViewById(R.id.typeEmail);
         share = getSharedPreferences("FileName", Context.MODE_PRIVATE);
         String saveEmail = share.getString("ReserveName", "Default value");
-        emailField.setHint(saveEmail);
+        emailField.setText(saveEmail);
         nextButton.setOnClickListener( b -> {
 
             //Give directions to go from this page, to SecondActivity
@@ -36,7 +36,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+
         SharedPreferences.Editor editor = share.edit();
+
         String typeEmail  = emailField.getText().toString();
         editor.putString("ReserveName", typeEmail);
         editor.commit();
