@@ -7,6 +7,7 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -14,13 +15,15 @@ public class ProfileActivity extends AppCompatActivity {
     public static final String ACTIVITY_NAME = "PROFILE_ACTIVITY";
     ImageButton takePicture;
     static final int REQUEST_IMAGE_CAPTURE = 1;
-
+    Button goToChat;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_profileactivity);
         //get Intent from MainActivity
         Intent loginPage = getIntent();
+        goToChat = (Button)findViewById(R.id.btnGotoChat);
         String emailType = loginPage.getStringExtra("emailType");
         EditText enterEmail = (EditText)findViewById(R.id.typeEmalprofle);
         enterEmail.setText(emailType);
@@ -30,6 +33,13 @@ public class ProfileActivity extends AppCompatActivity {
             if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
             }
+        });
+        goToChat.setOnClickListener( b -> {
+
+            //Give directions to go from this page, to SecondActivity
+            Intent nextPage = new Intent(ProfileActivity.this, ChatRoomActivity.class);
+            //Now make the transition:
+            startActivityForResult(nextPage, 345);
         });
         Log.e(ACTIVITY_NAME, "In function: onCreate"  /* replace with function name */);
     }
