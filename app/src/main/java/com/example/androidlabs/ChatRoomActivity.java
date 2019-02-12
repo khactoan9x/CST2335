@@ -90,7 +90,7 @@ public class ChatRoomActivity extends AppCompatActivity {
         isSend = send;
     }
 }
-
+//test folk
  class ChatAdapter extends BaseAdapter {
     private List<MessageModel> messageModelList;
     private Context context;
