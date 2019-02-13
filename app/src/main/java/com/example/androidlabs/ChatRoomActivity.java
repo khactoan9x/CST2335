@@ -38,12 +38,13 @@ public class ChatRoomActivity extends AppCompatActivity {
 
         btnSend.setOnClickListener(c -> {
             String message = editMessage.getText().toString();
+
             MessageModel model = new MessageModel(message, true);
             messageModelList2.add(model);
             editMessage.setText("");
             ChatAdapter adt = new ChatAdapter(messageModelList2, getApplicationContext());
             lv.setAdapter(adt);
-            Log.e("btnsend ", Integer.toString(messageModelList2.size()));
+
         });
 
         btnReceive.setOnClickListener(c -> {
@@ -90,7 +91,7 @@ public class ChatRoomActivity extends AppCompatActivity {
         isSend = send;
     }
 }
-
+//test folk
  class ChatAdapter extends BaseAdapter {
     private List<MessageModel> messageModelList;
     private Context context;
@@ -121,13 +122,14 @@ public class ChatRoomActivity extends AppCompatActivity {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
 
-        if (view == null) {
-            if(messageModelList.get(position).isSend()){
+        if (view == null){
+            if (messageModelList.get(position).isSend()){
                 view = inflater.inflate(R.layout.activity_main_send, null);
-            }else{
+
+            }else {
                 view = inflater.inflate(R.layout.activity_main_receive, null);
             }
-            TextView messageText = (TextView)view.findViewById(R.id.messageText);
+            TextView  messageText = (TextView)view.findViewById(R.id.messageText);
             messageText.setText(messageModelList.get(position).message);
         }
         return view;
