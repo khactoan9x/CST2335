@@ -20,6 +20,10 @@
     <string name="picture">Anh:</string>
     <string name="textBotton">Nhap de chup anh</string>
     <string name="sharedEmail"></string>
+    <string name="btnGotoChat">Chuyen qua phong tro chuyen</string>
+    <string name="btnSend">Nguoi Gui</string>
+    <string name="btnReceive">Nguoi Nhan</string>
+    <string name="editText">Nhap tin nhan</string>
 
 
 </resources>

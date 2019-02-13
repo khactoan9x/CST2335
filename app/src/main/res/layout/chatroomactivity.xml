@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:text="SEND" />
+        android:text="@string/btnSend" />
 
     <EditText
         android:id="@+id/editMessage"
@@ -31,7 +31,7 @@
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@id/btnSend"
         android:layout_toLeftOf="@id/btnReceive"
-        android:hint="Type here" />
+        android:hint="@string/editText" />
 
     <Button
         android:id="@+id/btnReceive"
@@ -39,5 +39,5 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:text="RECIEVE" />
+        android:text="@string/btnReceive" />
 </RelativeLayout>
