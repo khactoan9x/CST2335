@@ -2,6 +2,7 @@ package com.example.androidlabs;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +25,8 @@ public class ChatRoomActivity extends AppCompatActivity {
     List<MessageModel> messageModelList2 = new ArrayList<>();
     Button btnSend;
     Button btnReceive;
+    DBAdapter db;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,30 +37,57 @@ public class ChatRoomActivity extends AppCompatActivity {
         editMessage = (EditText)findViewById(R.id.editMessage);
         btnSend = (Button)findViewById(R.id.btnSend);
         btnReceive = (Button)findViewById(R.id.btnReceive);
-
-
+        db =  new DBAdapter(this);
+        viewMessage();
         btnSend.setOnClickListener(c -> {
             String message = editMessage.getText().toString();
 
-            MessageModel model = new MessageModel(message, true);
-            messageModelList2.add(model);
+//            MessageModel model = new MessageModel(message, true);
+//            messageModelList2.add(model);
+
+//            ChatAdapter adt = new ChatAdapter(messageModelList2, getApplicationContext());
+//            lv.setAdapter(adt);
+            db.insertMessage(message, true);
             editMessage.setText("");
-            ChatAdapter adt = new ChatAdapter(messageModelList2, getApplicationContext());
-            lv.setAdapter(adt);
+            messageModelList2.clear();
+
+            viewMessage();
 
         });
 
         btnReceive.setOnClickListener(c -> {
             String message = editMessage.getText().toString();
-            MessageModel model = new MessageModel(message, false);
-            messageModelList2.add(model);
+//            MessageModel model = new MessageModel(message, false);
+//            messageModelList2.add(model);
+
+//            ChatAdapter adt = new ChatAdapter(messageModelList2, getApplicationContext());
+//            lv.setAdapter(adt);
+            db.insertMessage(message, false);
             editMessage.setText("");
-            ChatAdapter adt = new ChatAdapter(messageModelList2, getApplicationContext());
-            lv.setAdapter(adt);
+            messageModelList2.clear();
+
+            viewMessage();
+
         });
 
         Log.e("ChatRoomActivity","onCreate");
 
+    }
+
+    private void viewMessage(){
+       Cursor cursor = db.getAllMessages();
+       //hien so message trong db
+       Log.d("message",String.valueOf(cursor.getCount()));
+
+        if (cursor.getCount() != 0){
+            while (cursor.moveToNext()){
+                MessageModel model = new MessageModel(cursor.getString(1), cursor.getInt(2)==0?true:false);
+                messageModelList2.add(model);
+                ChatAdapter adt = new ChatAdapter(messageModelList2, getApplicationContext());
+                lv.setAdapter(adt);
+
+            }
+        }
     }
 
 

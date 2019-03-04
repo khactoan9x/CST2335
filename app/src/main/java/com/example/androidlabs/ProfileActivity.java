@@ -63,6 +63,7 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Log.e(ACTIVITY_NAME, "In function: onResume"  /* replace with function name */);
+
     }
 
     @Override

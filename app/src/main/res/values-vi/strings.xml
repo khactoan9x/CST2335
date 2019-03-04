@@ -1,6 +1,6 @@
 
 <resources>
-    <string name="app_name">Lab1</string>
+    <string name="app_name">Ung dung cua toi</string>
     <string name="hello_message">Chao the gioi!</string>
     <string name="ButtonText">Toi la 1 cai nut</string>
     <string name="TextView">Day la bang:</string>
