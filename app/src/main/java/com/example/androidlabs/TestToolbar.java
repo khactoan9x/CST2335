@@ -1,6 +1,7 @@
 package com.example.androidlabs;
 
 import android.content.DialogInterface;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,7 +16,7 @@ import android.widget.Toast;
 
 public class TestToolbar extends AppCompatActivity {
     Toolbar myToolbar;
-    String overflowToast;
+    String overflowToast = "This is the initial message";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,8 +28,7 @@ public class TestToolbar extends AppCompatActivity {
 //        Button alertDialogButton = (Button)findViewById(R.id.btnToolbar);
 //        alertDialogButton.setOnClickListener( clik ->   alertExample()  );
 
-        //Show the toast immediately:
-        Toast.makeText(this, "You clicked on the overflow menu", Toast.LENGTH_LONG).show();
+
 
     }
     @Override
@@ -48,7 +48,7 @@ public class TestToolbar extends AppCompatActivity {
                 break;
 
             case R.id.choice1:
-                Toast.makeText(this, "This is the initial message", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, overflowToast, Toast.LENGTH_LONG).show();
                 break;
             case R.id.choice2:
                 alertExample();
