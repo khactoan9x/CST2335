@@ -10,12 +10,14 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.support.v7.widget.Toolbar;
 
 public class ProfileActivity extends AppCompatActivity {
     public static final String ACTIVITY_NAME = "PROFILE_ACTIVITY";
     ImageButton takePicture;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     Button goToChat;
+    Button toolbarPage;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
@@ -23,6 +25,7 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_profileactivity);
         //get Intent from MainActivity
         Intent loginPage = getIntent();
+
         goToChat = (Button)findViewById(R.id.btnGotoChat);
         String emailType = loginPage.getStringExtra("emailType");
         EditText enterEmail = (EditText)findViewById(R.id.typeEmalprofle);
@@ -42,6 +45,11 @@ public class ProfileActivity extends AppCompatActivity {
             startActivityForResult(nextPage, 345);
         });
         Log.e(ACTIVITY_NAME, "In function: onCreate"  /* replace with function name */);
+        toolbarPage = (Button)findViewById(R.id.btnGotoToolbar);
+        toolbarPage.setOnClickListener(c-> {
+            Intent toolbarPage = new Intent(ProfileActivity.this, TestToolbar.class);
+            startActivityForResult(toolbarPage, 345);
+        });
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
