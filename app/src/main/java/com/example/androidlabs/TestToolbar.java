@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 public class TestToolbar extends AppCompatActivity {
     Toolbar myToolbar;
-    String overflowToast = "This is the initial message";
+    String overflowToast = "You clicked on the overflow menu";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,13 +42,13 @@ public class TestToolbar extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId())
         {
-            //what to do when the menu item is selected:
+            //what to do when the menu item is selected:"This is the initial message"
             case R.id.MenuItems_overflow:
-                Toast.makeText(this, "You clicked on the overflow menu", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, overflowToast, Toast.LENGTH_LONG).show();
                 break;
 
             case R.id.choice1:
-                Toast.makeText(this, overflowToast, Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "This is the initial message", Toast.LENGTH_LONG).show();
                 break;
             case R.id.choice2:
                 alertExample();

@@ -8,6 +8,7 @@
         android:id="@+id/imageView4"
         android:layout_width="60dp"
         android:layout_height="60dp"
+
         app:srcCompat="@drawable/row_send" />
     <TextView
         android:layout_width="match_parent"
