@@ -71,7 +71,14 @@ public class DBAdapter extends SQLiteOpenHelper {
         printCursor(cursor);
         return cursor;
     }
+    public int deleteEntry(int id)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
 
+        String where="_id=?";
+        int numberOFEntriesDeleted= db.delete(DATABASE_TABLE, where, new String[]{Integer.toString(id)});
+        return numberOFEntriesDeleted;
+    }
     public void printCursor(Cursor cursor) {
         SQLiteDatabase db = this.getReadableDatabase();
         Log.v("Database Version:", Integer.toString(db.getVersion()));
@@ -84,5 +91,7 @@ public class DBAdapter extends SQLiteOpenHelper {
 
 
     }
+
+
 
 }

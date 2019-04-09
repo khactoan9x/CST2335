@@ -18,6 +18,7 @@ public class ProfileActivity extends AppCompatActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
     Button goToChat;
     Button toolbarPage;
+    Button goToWeatherBtn;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
@@ -50,6 +51,17 @@ public class ProfileActivity extends AppCompatActivity {
             Intent toolbarPage = new Intent(ProfileActivity.this, TestToolbar.class);
             startActivityForResult(toolbarPage, 345);
         });
+        goToWeatherBtn = (Button)findViewById(R.id.btnGoToWeatherPage);
+        goToWeatherBtn.setOnClickListener(c -> {
+            Intent goToMenuPage = new Intent(ProfileActivity.this, WeatherForecast.class);
+
+            startActivityForResult(goToMenuPage, 234);
+
+        });
+
+        Log.d(ACTIVITY_NAME, "In function: onCreate()");
+
+
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

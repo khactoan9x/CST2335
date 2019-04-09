@@ -38,8 +38,32 @@ public class ChatRoomActivity extends AppCompatActivity {
         btnSend = (Button)findViewById(R.id.btnSend);
         btnReceive = (Button)findViewById(R.id.btnReceive);
         db =  new DBAdapter(this);
+        boolean isTable = findViewById(R.id.fragmentLocation) != null;
         viewMessage();
-        btnSend.setOnClickListener(c -> {
+        lv.setOnItemClickListener((list, item, position, id) -> {
+            Bundle dataToPass = new Bundle();
+            dataToPass.putString("item", messageModelList2.get(position).message);
+            dataToPass.putInt("id", position);
+            dataToPass.putLong("db_id", messageModelList2.get(position).messageID);
+
+
+            if (isTable){
+                DetailFragment dFragment = new DetailFragment(); //add a DetailFragment
+                dFragment.setArguments( dataToPass ); //pass it a bundle for information
+                dFragment.setTablet(true);  //tell the fragment if it's running on a tablet or not
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .add(R.id.fragmentLocation, dFragment) //Add the fragment in FrameLayout
+                        .addToBackStack("AnyName") //make the back button undo the transaction
+                        .commit(); //actually load the fragment.
+            }else {
+                Intent emptyActivity = new Intent(this, EmptyActivity.class);
+                emptyActivity.putExtras(dataToPass);
+                startActivityForResult(emptyActivity, 345);
+            }
+
+        });
+/*        btnSend.setOnClickListener(c -> {
             String message = editMessage.getText().toString();
 
 //            MessageModel model = new MessageModel(message, true);
@@ -53,7 +77,7 @@ public class ChatRoomActivity extends AppCompatActivity {
 
             viewMessage();
 
-        });
+        });*/
 
         btnReceive.setOnClickListener(c -> {
             String message = editMessage.getText().toString();
@@ -72,6 +96,7 @@ public class ChatRoomActivity extends AppCompatActivity {
 
         Log.e("ChatRoomActivity","onCreate");
 
+
     }
 
     private void viewMessage(){
@@ -81,13 +106,32 @@ public class ChatRoomActivity extends AppCompatActivity {
 
         if (cursor.getCount() != 0){
             while (cursor.moveToNext()){
-                MessageModel model = new MessageModel(cursor.getString(1), cursor.getInt(2)==0?true:false);
+                MessageModel model = new MessageModel(cursor.getString(1), cursor.getInt(2)==0?true:false, cursor.getLong(0));
                 messageModelList2.add(model);
                 ChatAdapter adt = new ChatAdapter(messageModelList2, getApplicationContext());
                 lv.setAdapter(adt);
 
             }
         }
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 345)
+        {
+            if(resultCode == RESULT_OK) //if you hit the delete button instead of back button
+            {
+                long id = data.getLongExtra("db_id", 0);
+                deleteMessageId((int)id);
+            }
+        }
+    }
+
+    public void deleteMessageId(int id)
+    {
+
+        db.deleteEntry(id);
+        messageModelList2.clear();
+        viewMessage();
     }
 
 
@@ -96,10 +140,13 @@ public class ChatRoomActivity extends AppCompatActivity {
 class MessageModel {
     public String message;
     public boolean isSend;
+    public long messageID;
 
-    public MessageModel(String message, boolean isSend) {
+
+    public MessageModel(String message, boolean isSend, long messageID) {
         this.message = message;
         this.isSend = isSend;
+        this.messageID = messageID;
     }
 
     public MessageModel() {
@@ -119,6 +166,13 @@ class MessageModel {
 
     public void setSend(boolean send) {
         isSend = send;
+    }
+    public long getMessageID() {
+        return messageID;
+    }
+
+    public void setMessageID(long messageID) {
+        this.messageID = messageID;
     }
 }
 //test folk
@@ -152,7 +206,7 @@ class ChatAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
 
-        if (view == null){
+
             if (messageModelList.get(position).isSend()){
                 view = inflater.inflate(R.layout.activity_main_send, null);
 
@@ -161,7 +215,7 @@ class ChatAdapter extends BaseAdapter {
             }
             TextView  messageText = (TextView)view.findViewById(R.id.messageText);
             messageText.setText(messageModelList.get(position).message);
-        }
+
         return view;
     }
 }
